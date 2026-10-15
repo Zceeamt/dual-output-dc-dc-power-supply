@@ -1,6 +1,6 @@
 # Dual-Output 5 V and 12 V DC-DC Power Supply
 
-A dual-output power supply developed for an Antarctic weather-station design brief. Two MC34063A converters generate regulated 5 V and 12 V rails from a single 6 V nominal battery input, with discrete output-current limiting.
+A dual-output power supply developed for an Antarctic weather-station design brief. Designed for a 5–12 V input range, two MC34063A stages generate regulated 5 V and 12 V rails with discrete output-current limiting.
 
 [View the full interactive project page](https://zceeamt.github.io/#power-supply)
 
@@ -8,13 +8,13 @@ A dual-output power supply developed for an Antarctic weather-station design bri
 
 ## Project context and role
 
-This was an intensive group design project responding to a customer specification. I was responsible for the circuit design and Multisim simulation; the team fabricated, debugged, verified and documented the hardware. The final nine-document design portfolio received **80% (first-class level)**.
+This was an intensive group design project responding to a customer specification. I developed the circuit and Multisim model, then contributed to hardware bring-up, verification and the nine-document engineering tender.
 
 ## Requirements
 
 The customer required the design to:
 
-- Produce regulated 5 V and 12 V outputs from one battery.
+- Accept a 5–12 V battery input and produce regulated 5 V and 12 V outputs.
 - Withstand storage at -40 °C and operate from 0 °C to 70 °C.
 - Exceed 60% efficiency at a 20 mA load on either output.
 - Limit short-circuit current to 30 mA per output.
@@ -23,7 +23,7 @@ The customer required the design to:
 
 ## Converter design
 
-The two outputs use independent MC34063A switching-regulator stages:
+The two outputs use independent MC34063A switching-regulator stages designed around a 5–12 V input range. At the 6 V nominal analysis point:
 
 - A **boost converter** raises 6 V to 12 V.
 - A **buck converter** reduces 6 V to 5 V.
@@ -47,10 +47,10 @@ Vout = 1.25 × (1 + Rupper / Rlower)
 Each rail includes a discrete limiter using BC817 transistors and a 24 Ω sense resistor. As the sense voltage approaches approximately 0.6 V, the control transistor diverts base drive from the pass device:
 
 ```text
-Ilimit ≈ 0.6 V / 24 Ω ≈ 25 mA
+Ilimit,target ≈ 0.6 V / 24 Ω ≈ 25 mA
 ```
 
-This keeps the output below the customer's 30 mA short-circuit limit.
+This calculated design target remains below the customer's 30 mA short-circuit limit.
 
 ## Simulation and verification
 
@@ -70,7 +70,7 @@ Multisim was used for transient, temperature and input-voltage analysis.
 
 ## Engineering documentation
 
-The team compared multiple assembled boards using a weighted decision matrix and verified the selected design against the specification. The final portfolio included:
+The team realised and brought up multiple hardware prototypes, used a weighted decision matrix to select the strongest candidate, and verified it against the specification. The final engineering tender included:
 
 - Refined requirements specification
 - Project plan
@@ -87,7 +87,7 @@ The portfolio competed with 22 other teams for a proposed 200-unit production or
 
 | Item | Specification |
 |---|---|
-| Input | Single battery, 6 V nominal |
+| Input | Designed for 5–12 V; 6 V nominal analysis point |
 | Outputs | 5 V and 12 V |
 | Converters | MC34063A buck and boost stages |
 | Magnetics | 150 µH inductors |
@@ -95,8 +95,8 @@ The portfolio competed with 22 other teams for a proposed 200-unit production or
 | Current limiting | BC817 limiter per output, approximately 25 mA |
 | Simulated ripple | About 55 mV p-p at 12 V; under 1 mV p-p at 5 V |
 | Simulated start-up | Approximately 1.2 ms |
-| Tools | Multisim, soldering and bench testing |
-| Result | Hardware built and verified; portfolio graded 80% |
+| Tools | NI Multisim, multimeter and oscilloscope |
+| Outcome | Working hardware prototype and nine-document engineering tender |
 
 ## Skills demonstrated
 
